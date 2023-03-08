@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Minbar description">
+  <title>Minbar.uz | Kuzatadiganlarim sahifa</title>
+  <link rel="shortcut icon" type="image/jpg" href="./favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700;800&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="pt-[120px]">
+  <div x-data="{isOpenCategory: false}" id="container">
+    <header class="header bg-white shadow-md fixed w-full top-0 left-0 z-20">
+      <div class="container py-3 mx-auto">
+        <div class="flex items-center">
+          <div class="w-4/12 sm:w-2/12">
+            <div class="flex items-center space-x-4">
+              <a href="#" aria-label="minbar logo">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72.29 57.22" class="h-11">
+                  <path id="Path_9" data-name="Path 9" d="M0,0H63.29l9,28.5-9,28.72H0Z" fill="#17901a" />
+                  <path id="Path_8" data-name="Path 8" d="M47.964,0H36.738V-21.565L26.614-12.077h-.886L15.576-21.565V0H4.673V-37.222H14.851l11.44,10.965L37.786-37.222H47.964Z" transform="translate(6.327 47.222)" fill="#fff" />
+                </svg>
+              </a>
+
+              <button @click="isOpenCategory = true" class="lg:hidden">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 6h16M4 12h16M4 18h7" />
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <div x-data="{isLogged: false}" class="w-8/12 sm:w-10/12">
+            <div class="flex items-center justify-end space-x-5 sm:space-x-6">
+              <form class="hidden sm:block search-f flex-grow relative">
+                <input type="text" name="header-search" id="header-search" class="w-full rounded-md py-3 px-4 pl-12 shadow focus:outline-none" placeholder="Minbar.uz dan qidiring">
+                <button class="absolute inset-y-0 left-3 text-gray-400 hover:text-gray-500" aria-label="search button">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                  </svg>
+                </button>
+              </form>
+
+              <button class="flex items-center space-x-2 text-blue-500 group">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+
+                <span class="hidden md:block group-hover:underline">Savol so'rang?</span>
+              </button>
+
+              <div :class="isLogged ? 'hidden' : ''">
+                <button @click="$component('signin-popup').isOpen = true" class="px-3 sm:px-6 py-2 bg-primary text-white rounded hover:opacity-90 transition">
+                  Kirish
+                </button>
+
+                <div x-cloak id="signin-popup" x-data="{isOpen: false}">
+                  <div x-show="isOpen" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" class="w-screen h-screen flex fixed top-0 left-0 transform bg-gray-900 bg-opacity-80 z-10 overflow-y-auto">
+
+                    <div class="w-full max-w-md sm-down:max-w-11/12 m-auto bg-white p-6 rounded-lg relative">
+                      <button type="button" @click="isOpen = false" class="w-10 h-10 inline-flex items-center justify-center absolute top-0 right-0 text-black">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                      </button>
+
+                      <p class="font-medium text-center text-gray-600 text-lg mb-6">Tizimga kirish</p>
+
+                      <div class="space-y-4 mb-6">
+                        <div>
+                          <input type="text" name="signin-phone-email" id="signin-phone-email" class="w-full py-3 px-4 rounded border border-gray-200 transition" placeholder="Telefon raqam yoki Email">
+                        </div>
+
+                        <div>
+                          <input type="password" name="signin-password" id="signin-password" class="w-full py-3 px-4 rounded border border-gray-200 transition" placeholder="Parol">
+                          <p class="hidden mt-2 italic text-red-500 text-sm">Login yoki paroldan biri hato, iltimos tekshirib, qaytadan terib ko'ring!</p>
+                        </div>
+
+                        <button class="w-full p-3 flex space-x-2 items-center justify-center text-blue-500 border border-blue-400 rounded hover:bg-blue-500 hover:border-transparent hover:text-white transition duration-300">
+                          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 rotate-180 transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
+                          </svg>
+                          <span>Kirish</span>
+                        </button>
+                      </div>
+
+                      <div class="flex items-center justify-center divide-x divide-gray-300">
+                        <a href="#" class="px-3 font-serif text-blue-500 text-center underline hover:no-underline">Parolni unutdingizmi?</a>
+                        <button @click="$component('register-popup').isOpen = true, isOpen = false" class="px-3 text-center font-serif text-blue-500 underline hover:no-underline">Ro'yhatdan o'ting!</button>
+                      </div>
+
+                      <div class="relative text-center py-6 pb-4">
+                        <hr class="w-full bg-gray-300 absolute top-1/2 left-0 transform">
+                        <span class="bg-white px-3 uppercase text-xs tracking-widest relative z-auto">yoki</span>
+                      </div>
+
+                      <div class="flex flex-wrap -mx-2">
+                        <div class="flex-1 px-2">
+                          <button class="w-full flex items-center justify-center p-3 mt-2 text-white shadow-lg rounded bg-[#db4437] hover:opacity-75 transition duration-300">
+                            <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="w-5 h-5 flex-shrink-0">
+                              <path d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z" />
+                            </svg>
+                          </button>
+                        </div>
+
+                        <div class="flex-1 px-2">
+                          <button class="w-full flex items-center justify-center p-3 mt-2 text-white shadow-lg rounded bg-[#1877f2] hover:opacity-75 transition duration-300">
+                            <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="w-5 h-5 flex-shrink-0">
+                              <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+                            </svg>
+                          </button>
+                        </div>
+
+                        <div class="flex-1 px-2">
+                          <button class="w-full flex items-center justify-center p-3 mt-2 text-white shadow-lg rounded bg-[#26a5e4] hover:opacity-75 transition duration-300">
+                            <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="w-5 h-5 flex-shrink-0">
+                              <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z" />
+                            </svg>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div x-cloak id="register-popup" x-data="{isOpen: false}">
+                  <div x-show="isOpen" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" class="w-screen h-screen flex fixed top-0 left-0 transform bg-gray-900 bg-opacity-80 z-10 overflow-y-auto">
+
+                    <div class="w-full max-w-md sm-down:max-w-11/12 m-auto bg-white p-6 rounded-lg relative">
+                      <button type="button" @click="isOpen = false" class="w-10 h-10 inline-flex items-center justify-center absolute top-0 right-0 text-black">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                      </button>
+
+                      <p class="font-medium text-center text-gray-600 text-lg mb-6">Ro'yhatdan o'tish</p>
+
+                      <div class="space-y-4">
+                        <div>
+                          <input type="text" name="register-name-family-name" id="register-name-family-name" class="w-full p-3 rounded border border-gray-200 transition" placeholder="Familiya va ismi*">
+                        </div>
+
+                        <div>
+                          <input type="text" name="register-phone-email" id="register-phone-email" class="w-full p-3 rounded border border-gray-200 transition" placeholder="Telefon raqam yoki Email*">
+                        </div>
+
+                        <div>
+                          <input type="password" name="register-password" id="register-password" class="w-full p-3 rounded border border-gray-200 transition" placeholder="Parol*">
+                          <p class="hidden mt-2 italic text-red-500 text-sm">Parol kamida 6 simvoldan, hamda &laquo;Harflar va Sonlardan&raquo; iborat bo'lishi shart!</p>
+                        </div>
+
+                        <div>
+                          <input type="password" name="register-password-repeat" id="register-password-repeat" class="w-full p-3 rounded border border-gray-200 transition" placeholder="Parolni takrorlash*">
+                          <p class="hidden mt-2 italic text-red-500 text-sm">Parol mos kelmayabti, iltimos tekshirib qaytadan kiriting!</p>
+                        </div>
+
+                        <div>
+                          <label for="register-agree" class="c-checkbox body-text items-start cursor-pointer">
+                            <input type="checkbox" name="register-agree" id="register-agree">
+                            <span class="c-checkbox__icon mt-1 mr-2">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="8.16">
+                                <g id="check-icon" transform="translate(-508 -397.92)">
+                                  <path id="Path_28" data-name="Path 28" d="M17.309 7.651a.72.72 0 010 1.018l-6.72 6.72a.72.72 0 01-1.018 0l-3.84-3.84a.72.72 0 111.018-1.018l3.331 3.331 6.211-6.211a.72.72 0 011.018 0z" transform="translate(502.48 390.48)" fill="#fff" fill-rule="evenodd"></path>
+                                </g>
+                              </svg>
+                            </span>
+                            <span class="c-checkbox__title font-serif">Ro'yhattan o'tish tugmasini bosish orqali, men <a href="#" class="text-blue-500 underline hover:no-underline">foydalanish shartlarini</a> tasdiqlayman.</span>
+                          </label>
+                        </div>
+
+                        <button class="w-full p-3 flex space-x-2 items-center justify-center text-blue-500 border border-blue-400 rounded hover:bg-blue-500 hover:border-transparent hover:text-white transition duration-300">
+                          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2" d="M12 11c0 3.517-1.009 6.799-2.753 9.571m-3.44-2.04l.054-.09A13.916 13.916 0 008 11a4 4 0 118 0c0 1.017-.07 2.019-.203 3m-2.118 6.844A21.88 21.88 0 0015.171 17m3.839 1.132c.645-2.266.99-4.659.99-7.132A8 8 0 008 4.07M3 15.364c.64-1.319 1-2.8 1-4.364 0-1.457.39-2.823 1.07-4" />
+                          </svg>
+                          <span>Ro'yhattan o'tish</span>
+                        </button>
+                      </div>
+
+                      <div class="relative text-center py-6">
+                        <hr class="w-full bg-gray-300 absolute top-1/2 left-0 transform">
+                        <span class="bg-white px-3 uppercase text-xs tracking-widest relative z-auto">yoki</span>
+                      </div>
+
+                      <div class="flex flex-wrap -mx-2">
+                        <div class="flex-grow px-2">
+                          <button class="w-full flex space-x-2 items-center justify-center p-3 mt-2 text-white shadow-lg rounded-full bg-[#db4437] hover:opacity-75 transition duration-300">
+                            <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="w-5 h-5 flex-shrink-0">
+                              <path d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z"></path>
+                            </svg>
+                            <span>Google orqali</span>
+                          </button>
+                        </div>
+
+                        <div class="flex-grow px-2">
+                          <button class="w-full flex space-x-2 items-center justify-center p-3 mt-2 text-white shadow-lg rounded-full bg-[#1877f2] hover:opacity-75 transition duration-300">
+                            <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="w-5 h-5 flex-shrink-0">
+                              <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"></path>
+                            </svg>
+                            <span>Facebook orqali</span>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <a :class="isLogged ? '' : 'hidden'" href="#" class="px-3 sm:px-6 py-2 bg-primary text-white rounded hover:opacity-90 transition">Yozish</a>
+
+              <div :class="isLogged ? '' : 'hidden'">
+                <div x-data="{isOpen: false}" @keydown.escape="isOpen = false" class="relative">
+                  <button @click="isOpen = ! isOpen" class="flex items-center space-x-2 text-gray-400 focus:outline-none">
+                    <img src="img/people/jack-50x50.jpeg" alt="jack sparrow" class="w-9 h-9 rounded-full">
+
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 flex-shrink-0 transition" :class="{'rotate-180' : isOpen}" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </button>
+
+                  <div x-cloak x-show="isOpen" @click.away="isOpen = false" x-transition:enter="transition ease-out duration-150" x-transition:enter-start="opacity-0 translate-y-4" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 translate-y-4" class="absolute top-11 right-0 py-2 bg-white rounded border border-gray-200 whitespace-nowrap z-20 shadow-md min-w-[200px]">
+                    <ul>
+                      <li>
+                        <a href="#" class="flex items-center space-x-2 px-4 py-2 hover:bg-gray-100 transition">
+                          <span class="relative">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                            </svg>
+
+                            <span class="absolute bg-red-600 -top-4 left-1.5 text-white text-xs rounded-full p-1 px-1.5">12</span>
+                          </span>
+                          <span>Eslatmalar</span>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#" class="flex items-center space-x-2 px-4 py-2 hover:bg-gray-100 transition">
+                          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                          </svg>
+
+                          <span>Postlar</span>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#" class="flex items-center space-x-2 px-4 py-2 hover:bg-gray-100 transition">
+                          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                          </svg>
+
+                          <span>Qoralamalar</span>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#" class="flex items-center space-x-2 px-4 py-2 hover:bg-gray-100 transition">
+                          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" />
+                          </svg>
+
+                          <span>Reytinglar</span>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#" class="flex items-center space-x-2 px-4 py-2 hover:bg-gray-100 transition">
+                          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z" />
+                          </svg>
+
+                          <span>Yordam</span>
+                        </a>
+                      </li>
+                      <li>
+                        <hr class="border-t border-gray-200 my-2">
+                      </li>
+                      <li>
+                        <a href="#" class="flex items-center space-x-2 px-4 py-2 hover:bg-gray-100 transition">
+                          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                          </svg>
+
+                          <span>Sozlamalar</span>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#" class="flex items-center space-x-2 px-4 py-2 hover:bg-gray-100 transition">
+                          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                          </svg>
+
+                          <span>Chiqish</span>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <hr class="container mx-auto border-t border-gray-200 mb-3">
+
+      <div class="container mx-auto">
+        <ul class="flex space-x-4 items-center justify-center">
+          <li class="group border-b-2 border-transparent hover:border-primary transition">
+            <a href="#" class="flex items-center space-x-2 px-3 pb-3 transition group-hover:text-primary">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
+              </svg>
+
+              <span class="hidden md:block">O'qiydiganlarim</span>
+            </a>
+          </li>
+          <li class="group border-b-2 border-primary hover:border-primary transition">
+            <a href="#" class="flex items-center space-x-2 px-3 pb-3 text-primary transition group-hover:text-primary">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+              </svg>
+
+              <span class="hidden md:block">Kuzatadiganlarim</span>
+            </a>
+          </li>
+          <li class="group border-b-2 border-transparent hover:border-primary transition">
+            <a href="#" class="flex items-center space-x-2 px-3 pb-3 transition group-hover:text-primary">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
+              </svg>
+
+              <span class="hidden md:block">Saqlanganlar</span>
+            </a>
+          </li>
+
+          <li class="md:hidden">
+            <a href="#" class="flex items-center space-x-2 px-3 pb-3 hover:text-gray-600">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207" />
+              </svg>
+            </a>
+          </li>
+          <li class="md:hidden">
+            <a href="#" class="flex items-center space-x-2 px-3 pb-3 hover:text-gray-600">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
+              </svg>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </header>
+
+    <main class="main pt-12">
+      <div class="container mx-auto">
+        <div class="flex flex-wrap -mx-3">
+          <aside x-show.transition="true" :class="{'isOpenCategory': isOpenCategory}" class="sidebar w-full h-screen fixed top-0 left-0 z-20 lg:relative lg:z-0 lg:h-auto lg:w-2/12 lg:bg-transparent">
+            <div :class="{'isOpenNav': isOpenCategory}" class="w-10/12 sm:w-6/12 h-screen px-3 py-6 overflow-y-auto bg-white lg:relative lg:h-auto lg:w-full lg:py-0 lg:bg-transparent">
+              <nav>
+                <ul class="sidebar__list">
+                  <li>
+                    <a href="#" class="sidebar__link sidebar__link--active">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="w-5 flex-shrink-0">
+                        <path fill="currentColor" d="M120 180c0-97.297 65.434-143.762 90.512-180C194.086 12.05 0 59.29 0 256c0 140.61 115.39 256 256 256 196.688 0 243.71-193.75 256-210.496C478.156 324.918 429.21 392 331 392c-115.797 0-211-96.203-211-212zm0 0" />
+                        <path fill="currentColor" d="M417.254 79.086L376 0l-40.387 79.203-90.133 13.258 65.333 63.484-15.247 90.825L376 204.246l81.844 42.246-15.54-90.75 65.126-63.707zm0 0" />
+                      </svg>
+                      <span>Aqiyda</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#" class="sidebar__link">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 391 391" class="w-5 flex-shrink-0">
+                        <path fill="currentColor" d="M390.269 186.529l-75-123a5 5 0 00-6.084-2.056l-8.965 3.493-1.259-2.065a7.366 7.366 0 00-8.965-3.029L195.5 96.69l-94.496-36.817a7.365 7.365 0 00-8.965 3.029l-1.259 2.065-8.965-3.493a5 5 0 00-6.084 2.056l-75 123a4.998 4.998 0 002.426 7.251l106.966 42.394-13.941 89.69a5.002 5.002 0 004.941 5.768h12.486a5.003 5.003 0 002.831-.878l79.06-54.306 79.06 54.306a5 5 0 002.831.878h12.486a4.998 4.998 0 004.941-5.768l-13.941-89.69 106.966-42.394a4.997 4.997 0 002.426-7.252zM199.5 224.227v-64a4 4 0 00-8 0v64L46.071 166.59l55.335-90.748 91.419 35.619c1.721.67 3.629.67 5.35 0l91.419-35.619 55.334 90.748L199.5 224.227z" />
+                        <path fill="currentColor" d="M284.28 106.929a3.999 3.999 0 00-5.18-2.274l-59 23a4 4 0 102.906 7.454l59-23a4.001 4.001 0 002.274-5.18zM229.829 149.639a4 4 0 102.906 7.454l59-23a4 4 0 10-2.906-7.454l-59 23zM238.062 178.835a4.002 4.002 0 005.18 2.274l59-23a4 4 0 00-2.906-7.455l-59 23a4.002 4.002 0 00-2.274 5.181zM170.9 127.655l-59-23a4.001 4.001 0 00-2.906 7.454l59 23a4.002 4.002 0 005.18-2.274 4 4 0 00-2.274-5.18zM161.172 149.639l-59-23a4.001 4.001 0 00-2.906 7.454l59 23a4.002 4.002 0 005.18-2.274 4.001 4.001 0 00-2.274-5.18zM150.664 173.655l-59-23a4.002 4.002 0 00-2.906 7.455l59 23a4.002 4.002 0 002.906-7.455z" />
+                      </svg>
+                      <span>Qur'on</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#" class="sidebar__link">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 308.619 308.619" class="w-5 flex-shrink-0">
+                        <path fill="currentColor" d="M203.271 52.852H89.541c-1.392 11.367-8.421 21.161-18.817 26.114v177.033c7.051 3.358 12.545 8.947 15.79 15.74a33.445 33.445 0 013.026 10.372h113.731a33.473 33.473 0 013.027-10.372c3.245-6.793 8.74-12.382 15.79-15.74V78.965c-10.394-4.952-17.423-14.746-18.817-26.113zM137.36 64.577a8.214 8.214 0 012.695-1.195c.78-.887 1.629-1.609 2.54-2.153 1.844-2.232 3.81-3.512 3.81-3.512s1.968 1.279 3.811 3.512c.912.544 1.763 1.267 2.542 2.153.962.236 1.87.629 2.696 1.195 3.221 2.209 4.442 6.505 3.65 11.205.49.621.758 1.288.758 1.984 0 .697-.268 1.361-.758 1.982.792 4.7-.43 8.994-3.65 11.204a8.05 8.05 0 01-2.696 1.195c-.779.886-1.63 1.612-2.542 2.153-1.843 2.234-3.808 3.513-3.808 3.513s-1.969-1.278-3.813-3.513c-.911-.541-1.76-1.268-2.54-2.153a8.062 8.062 0 01-2.695-1.195c-3.221-2.21-4.443-6.504-3.65-11.204-.49-.621-.757-1.285-.757-1.982 0-.696.267-1.363.757-1.984-.793-4.7.429-8.996 3.65-11.205zm-19.825 60.816c2.64-1.811 5.538-3.065 8.606-3.806 2.48-2.83 5.198-5.151 8.094-6.875 5.899-7.135 12.17-11.211 12.17-11.211s6.272 4.076 12.171 11.209c2.896 1.725 5.615 4.047 8.096 6.877 3.07.74 5.967 1.995 8.606 3.806 10.278 7.05 14.175 20.76 11.648 35.76 1.563 1.979 2.416 4.108 2.416 6.329 0 2.22-.854 4.349-2.416 6.33 2.527 14.998-1.369 28.709-11.648 35.758-2.64 1.811-5.536 3.066-8.606 3.807-2.48 2.83-5.199 5.151-8.096 6.875-5.898 7.133-12.168 11.209-12.168 11.209s-6.273-4.074-12.173-11.208c-2.897-1.724-5.614-4.046-8.095-6.876-3.069-.74-5.966-1.996-8.606-3.807-10.277-7.049-14.174-20.76-11.646-35.758-1.563-1.982-2.418-4.11-2.418-6.33 0-2.221.855-4.35 2.418-6.329-2.528-15.001 1.37-28.711 11.647-35.76zm32.682 148.34c-1.843 2.233-3.808 3.512-3.808 3.512s-1.969-1.279-3.813-3.512c-.855-.51-1.652-1.184-2.392-1.995-.049-.054-.1-.103-.148-.157a8.184 8.184 0 01-2.695-1.195c-3.221-2.209-4.443-6.506-3.65-11.205-.49-.621-.757-1.287-.757-1.984 0-.697.267-1.361.757-1.984-.793-4.697.429-8.992 3.65-11.203a8.132 8.132 0 012.695-1.195c.78-.886 1.629-1.611 2.54-2.153 1.844-2.233 3.81-3.511 3.81-3.511s1.968 1.277 3.811 3.511c.912.542 1.763 1.268 2.542 2.153a8.11 8.11 0 012.696 1.195c3.221 2.211 4.442 6.506 3.65 11.203.49.623.758 1.287.758 1.984 0 .697-.268 1.363-.758 1.984.792 4.699-.43 8.996-3.65 11.205a8.17 8.17 0 01-2.696 1.195c-.048.055-.099.104-.148.157-.74.812-1.539 1.486-2.394 1.995z" />
+                        <path fill="currentColor" d="M269.31 0H56.872a5.267 5.267 0 00-4.34 2.282L34.97 27.802a5.265 5.265 0 00-.897 3.5c-.006.105-.031.205-.031.312v271.738a5.269 5.269 0 005.269 5.269h214.193a5.268 5.268 0 005.269-5.269v-21.075h10.538a5.268 5.268 0 005.269-5.268V5.269A5.271 5.271 0 00269.31 0zm-39.389 258.578a3.915 3.915 0 01-2.518 3.658c-5.046 1.927-9.196 5.28-12.083 9.502a25.572 25.572 0 00-4.158 10.537 26.28 26.28 0 00-.311 3.784 3.917 3.917 0 01-3.916 3.883H85.878a3.916 3.916 0 01-3.916-3.883 26.28 26.28 0 00-.31-3.784 25.544 25.544 0 00-4.158-10.537c-2.886-4.222-7.037-7.575-12.083-9.502a3.915 3.915 0 01-2.519-3.658V76.386a3.915 3.915 0 012.518-3.658c9.965-3.808 16.462-13.16 16.552-23.825a3.916 3.916 0 013.916-3.883h121.057a3.916 3.916 0 013.916 3.882c.091 10.667 6.588 20.019 16.552 23.826a3.914 3.914 0 012.518 3.658v182.192zm34.12 13.16h-5.269V31.612a5.268 5.268 0 00-5.269-5.269H64.537l10.878-15.807h188.626v261.202z" />
+                      </svg>
+                      <span>Hadis</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#" class="sidebar__link">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 335.08 335.079" class="w-5 flex-shrink-0">
+                        <path fill="currentColor" d="M311.175 115.775c-1.355-10.186-1.546-27.73 7.915-33.621.169-.108.295-.264.443-.398 7.735-2.474 13.088-5.946 8.886-10.618l-114.102-34.38L29.56 62.445S8.403 65.469 10.293 98.339c1.026 17.89 6.637 26.676 11.544 31l-15.161 4.569c-4.208 4.672 1.144 8.145 8.88 10.615.147.138.271.293.443.401 9.455 5.896 9.273 23.438 7.913 33.626-33.967 9.645-21.774 12.788-21.774 12.788l7.451 1.803c-5.241 4.736-10.446 13.717-9.471 30.75 1.891 32.864 19.269 35.132 19.269 35.132l120.904 39.298 182.49-44.202s12.197-3.148-21.779-12.794c-1.366-10.172-1.556-27.712 7.921-33.623.174-.105.301-.264.442-.396 7.736-2.474 13.084-5.943 8.881-10.615l-7.932-2.395c5.29-3.19 13.236-11.527 14.481-33.183.859-14.896-3.027-23.62-7.525-28.756l15.678-3.794c.001.006 12.198-3.142-21.773-12.788zm-152.642-.421l30.688-6.307 103.708-21.312 15.451-3.178c-4.937 9.036-4.73 21.402-3.913 29.35.179 1.798.385 3.44.585 4.688L288.14 122.8l-130.897 32.563 1.29-40.009zM26.71 147.337l15.449 3.178 99.597 20.474 8.701 1.782 26.093 5.363 1.287 40.01-134.534-33.471-13.263-3.296c.195-1.25.401-2.89.588-4.693.812-7.942 1.023-20.311-3.918-29.347zm-6.002-50.58c-.187-8.743 1.371-15.066 4.52-18.28 2.004-2.052 4.369-2.479 5.991-2.479.857 0 1.474.119 1.516.119l79.607 25.953 39.717 12.949-1.303 40.289L39.334 124.07l-5.88-1.647a3.56 3.56 0 00-.735-.113c-.459-.033-11.475-1.047-12.011-25.553zm119.871 184.109L23.28 247.98a3.489 3.489 0 00-.733-.116c-.467-.031-11.488-1.044-12.021-25.544-.19-8.754 1.376-15.071 4.519-18.288 2.009-2.052 4.375-2.479 5.994-2.479.859 0 1.474.115 1.519.115 0 0 .005 0 0 0l119.316 38.908-1.295 40.29zm153.705-41.407c.185 1.804.391 3.443.591 4.693l-147.812 36.771 1.292-40.01 31.601-6.497 4.667 1.129 17.492-5.685 80.631-16.569 15.457-3.18c-4.942 9.035-4.737 21.406-3.919 29.348zm8.142-54.375a2.84 2.84 0 00-.791.122l-11.148 3.121-106.148 29.764-1.298-40.289 34.826-11.359 84.327-27.501c.011-.005 4.436-.988 7.684 2.315 3.144 3.214 4.704 9.537 4.52 18.28-.55 24.498-11.571 25.516-11.972 25.547z" />
+                      </svg>
+                      <span>Tafsir</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#" class="sidebar__link">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 512 512" class="w-5 flex-shrink-0">
+                        <path fill="currentColor" d="M507.606 245.393l-66.195-66.195V85.589c0-8.284-6.716-15-15-15h-93.609L266.607 4.394c-5.857-5.858-15.355-5.858-21.213 0l-66.195 66.195h-93.61c-8.284 0-15 6.716-15 15v93.609L4.394 245.394c-5.858 5.858-5.858 15.355 0 21.213l66.195 66.196v93.609c0 8.284 6.716 15 15 15H144.6V320.267c0-56.34 42.042-103.038 96.4-110.386V196.24c-49.888-17.609-38.539-90.755 15.001-91.806 8.284 0 14.999 6.716 14.999 15s-6.716 15-15 15c-9.447 0-17.133 7.686-17.133 17.134-.036 15.145 18.582 22.871 29.245 12.112 5.857-5.858 15.355-5.858 21.213 0s5.858 15.355 0 21.213c-5.24 5.24-11.499 9.082-18.325 11.367v13.621c54.358 7.349 96.4 54.047 96.4 110.386v121.144h59.011c8.284 0 15-6.716 15-15v-93.609l66.195-66.196c5.859-5.858 5.859-15.355 0-21.213z" />
+                        <path fill="currentColor" d="M337.4 335.267H174.6v101.546l70.793 70.793c5.857 5.858 15.355 5.858 21.213 0l70.794-70.794zM256 238.867c-39.761 0-72.955 28.656-80.015 66.4h160.029c-7.059-37.745-40.253-66.4-80.014-66.4z" />
+                      </svg>
+                      <span>Fiqh</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#" class="sidebar__link">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 350 350" class="w-5 flex-shrink-0">
+                        <path fill="currentColor" d="M248.631 294.941h-4.045c-6.326-36.704-7.344-74.362-29.263-95.858-21.472-21.054-49.554-27.569-68.185-44.61v-7.976c1.707-.817 2.897-2.547 2.897-4.562 0-2.016-1.19-3.746-2.897-4.564v-3.39c.445-.51.724-1.169.724-1.898 0-1.6-2.897-9.853-2.897-9.853s-2.898 8.253-2.898 9.853c0 .73.279 1.39.725 1.899v3.389c-1.708.817-2.898 2.548-2.898 4.564s1.191 3.745 2.898 4.563v7.975c-18.631 17.041-46.714 23.556-68.185 44.611-21.92 21.497-22.939 59.154-29.264 95.858h-4.047l-6.955 17.967h221.246l-6.956-17.968zm-174.166-.724h-7.856v-11.302h7.856v11.302zm24.808 0h-7.855v-11.302h7.855v11.302zm24.809 0h-7.855v-11.302h7.855v11.302zm24.811 0h-7.857v-11.302h7.857v11.302zm24.808 0h-7.857v-11.302h7.857v11.302zm24.807 0h-7.855v-11.302h7.855v11.302zm24.81 0h-7.857v-11.302h7.857v11.302z" />
+                        <path fill="currentColor" d="M308.162 225.744v-8.563l-9.355-8.162-11.952 10.434L274.9 209.02l-9.336 8.15v8.574H250.35v28.398h10.995v68.039H26.623V350h285.755v-95.857h10.999v-28.398h-15.215zm-11.035 91.897H276.6v-27.826h2.84v-10.951l7.424-7.297 7.424 7.297v10.951h2.84v27.826z" />
+                        <path fill="currentColor" d="M274.9 185.547l-9.336 8.149V211.4l9.336-8.15 11.956 10.434 11.95-10.434 9.356 8.163v-17.706l-9.355-8.161-11.951 10.433z" />
+                        <path fill="currentColor" d="M259.113 159.962l6.451 20.068v7.896l9.336-8.149 11.955 10.432 11.951-10.431 9.356 8.161v-7.914l6.451-20.063h-6.451V79.179l6.451-20.063h-17.139V41.619c0-5.115-3.621-9.384-8.438-10.387v-6.965c1.707-.817 2.898-2.547 2.898-4.561 0-2.016-1.191-3.746-2.898-4.564v-3.391a2.872 2.872 0 00.725-1.899c0-1.6-2.898-9.852-2.898-9.852s-2.897 8.253-2.897 9.852c0 .731.279 1.39.724 1.899v3.392c-1.707.817-2.897 2.547-2.897 4.563 0 2.015 1.19 3.744 2.897 4.561v6.965c-4.818 1.003-8.438 5.271-8.438 10.387v17.497h-17.139l6.451 20.068v80.777h-6.451zm21.94-69.652h1.607v-6.198l4.203-4.131 4.201 4.131v6.198h1.607v15.752h-11.619V90.31zm0 37.381h1.607v-6.195l4.203-4.133 4.201 4.133v6.195h1.607v15.752h-11.619v-15.752z" />
+                      </svg>
+                      <span>Siyrat</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#" class="sidebar__link">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512.001 512.001" class="w-5 flex-shrink-0">
+                        <path fill="currentColor" d="M363.266 211.569v-62.835h-62.834L256 104.303l-44.43 44.431h-62.835v62.835L104.303 256l44.432 44.431v62.835h62.835L256 407.697l44.432-44.431h62.834v-62.835L407.698 256z" />
+                        <path fill="currentColor" d="M437.021 181.019V74.98H330.982L256 0l-74.981 74.98H74.982v106.038L0 256l74.98 74.981V437.02h106.038L256 512.001l74.981-74.981H437.02V330.981L512 256l-74.979-74.981zm-43.755 131.837v80.409h-80.409L256 450.124l-56.856-56.858h-80.409v-80.409L61.876 256l56.858-56.856v-80.409h80.409L256 61.876l56.856 56.858h80.409v80.409L450.125 256l-56.859 56.856z" />
+                      </svg>
+                      <span>Tazkiya</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#" class="sidebar__link">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 431.156 431.156" class="w-5 flex-shrink-0">
+                        <path fill="currentColor" d="M302 242.556h-7.609v-15.242c0-41.989-50.483-73.686-70.64-84.669a7.784 7.784 0 00-1.318-4.003c3.447-2.207 5.587-5.971 5.587-10.047 0-4.075-2.14-7.84-5.587-10.05a7.784 7.784 0 001.345-4.355c0-2.737-1.422-5.232-3.762-6.688l-2.95-23.407a1.5 1.5 0 00-2.976 0l-2.95 23.407c-2.34 1.456-3.762 3.951-3.762 6.688 0 1.558.476 3.071 1.344 4.355-3.446 2.209-5.586 5.974-5.586 10.05 0 4.076 2.14 7.84 5.586 10.047a7.783 7.783 0 00-1.317 4.003c-20.157 10.983-70.64 42.68-70.64 84.669v15.242h-7.609a3.35 3.35 0 00-3.35 3.35v32.657c0 1.85 1.5 3.35 3.35 3.35h3.806v66.323h29.986v-3.015c0-30.454 52.629-50.411 52.629-50.411s52.633 19.957 52.633 50.411v3.015h29.985v-66.323H302c1.85 0 3.35-1.5 3.35-3.35v-32.657a3.35 3.35 0 00-3.35-3.35zm-141.881 28.723h-9.672v-10.924c0-4.328 2.688-7.164 4.836-7.164 2.149 0 4.836 2.836 4.836 7.164v10.924zm30.147 0h-9.671v-10.924c0-4.328 2.686-7.164 4.835-7.164 2.15 0 4.836 2.836 4.836 7.164v10.924zm30.146 0h-9.669v-10.924c0-4.328 2.685-7.164 4.835-7.164 2.149 0 4.834 2.836 4.834 7.164v10.924zm30.147 0h-9.67v-10.924c0-4.328 2.686-7.164 4.835-7.164 2.148 0 4.835 2.836 4.835 7.164v10.924zm30.149 0h-9.673v-10.924c0-4.328 2.688-7.164 4.836-7.164 2.15 0 4.837 2.836 4.837 7.164v10.924zM428.859 275.921h-5.216v-10.449c0-28.453-33.813-50.011-47.94-57.777l.002-.026a5.781 5.781 0 00-.755-2.849c2.271-1.626 3.662-4.224 3.662-7.025 0-2.802-1.393-5.4-3.663-7.026.49-.866.756-1.845.756-2.849 0-1.965-.981-3.762-2.609-4.862l-1.996-15.831a1.5 1.5 0 00-2.976 0l-1.993 15.83c-1.629 1.098-2.61 2.896-2.61 4.862 0 1.004.265 1.983.754 2.848-2.271 1.626-3.665 4.225-3.665 7.027 0 2.802 1.393 5.399 3.664 7.025a5.795 5.795 0 00-.753 2.849l.001.026c-14.125 7.765-47.939 29.324-47.939 57.778v10.449h-5.219a2.296 2.296 0 00-2.297 2.296v22.39a2.296 2.296 0 002.297 2.296h2.608v45.471h20.559v-2.068c0-20.879 36.08-34.56 36.08-34.56s36.083 13.682 36.083 34.56v2.068h20.559v-45.471h2.608a2.296 2.296 0 002.297-2.296v-22.39a2.3 2.3 0 00-2.299-2.296zm-97.27 19.692h-6.63v-7.491c0-2.967 1.842-4.909 3.316-4.909 1.473 0 3.314 1.942 3.314 4.909v7.491zm20.669 0h-6.63v-7.491c0-2.967 1.843-4.909 3.315-4.909 1.474 0 3.315 1.942 3.315 4.909v7.491zm20.668 0h-6.629v-7.491c0-2.967 1.84-4.909 3.314-4.909s3.315 1.942 3.315 4.909v7.491zm20.666 0h-6.629v-7.491c0-2.967 1.841-4.909 3.316-4.909 1.473 0 3.313 1.942 3.313 4.909v7.491zm20.669 0h-6.63v-7.491c0-2.967 1.843-4.909 3.315-4.909 1.473 0 3.315 1.942 3.315 4.909v7.491zM120.793 275.921h-5.22v-10.449c0-28.455-33.815-50.014-47.939-57.778l.001-.025a5.797 5.797 0 00-.752-2.849c2.271-1.626 3.664-4.224 3.664-7.025 0-2.802-1.393-5.401-3.665-7.027a5.786 5.786 0 00.753-2.848c0-1.966-.981-3.764-2.609-4.862l-1.994-15.83a1.5 1.5 0 00-2.976 0l-1.997 15.831c-1.628 1.1-2.61 2.897-2.61 4.862a5.79 5.79 0 00.756 2.849c-2.271 1.626-3.663 4.225-3.663 7.026s1.392 5.399 3.662 7.025a5.784 5.784 0 00-.755 2.849l.001.027c-14.127 7.766-47.939 29.324-47.939 57.776v10.449H2.296A2.296 2.296 0 000 278.218v22.39a2.296 2.296 0 002.296 2.296h2.608v45.471h20.56v-2.068c0-20.879 36.079-34.56 36.079-34.56s36.082 13.682 36.082 34.56v2.068h20.558v-45.471h2.609a2.296 2.296 0 002.296-2.296v-22.39a2.294 2.294 0 00-2.295-2.297zm-97.269 19.692h-6.629v-7.491c0-2.967 1.84-4.909 3.313-4.909s3.316 1.942 3.316 4.909v7.491zm20.667 0h-6.628v-7.491c0-2.967 1.841-4.909 3.313-4.909 1.475 0 3.315 1.942 3.315 4.909v7.491zm20.667 0h-6.63v-7.491c0-2.967 1.843-4.909 3.316-4.909 1.474 0 3.314 1.942 3.314 4.909v7.491zm20.671 0h-6.632v-7.491c0-2.967 1.842-4.909 3.315-4.909 1.473 0 3.317 1.942 3.317 4.909v7.491zm20.667 0H99.566v-7.491c0-2.967 1.841-4.909 3.313-4.909 1.476 0 3.317 1.942 3.317 4.909v7.491z" />
+                      </svg>
+                      <span>Jamiyat</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#" class="sidebar__link">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="w-5 flex-shrink-0">
+                        <path fill="currentColor" d="M153.6 153.6h204.8v204.8H153.6z" />
+                        <path fill="currentColor" d="M486.4 281.6c15.36 0 25.6-10.24 25.6-25.6 0-12.8-10.24-25.6-25.6-25.6h-25.6v-51.2h25.6c15.36 0 25.6-10.24 25.6-25.6 0-12.8-10.24-25.6-25.6-25.6h-25.6v-25.6c0-28.16-23.04-51.2-51.2-51.2H384V25.6C384 12.8 373.76 0 358.4 0c-12.8 0-25.6 10.24-25.6 25.6v25.6h-51.2V25.6C281.6 12.8 271.36 0 256 0s-25.6 10.24-25.6 25.6v25.6h-51.2V25.6c0-12.8-10.24-25.6-25.6-25.6C138.24 0 128 10.24 128 25.6v25.6h-25.6c-28.16 0-51.2 23.04-51.2 51.2V128H25.6C10.24 128 0 138.24 0 153.6c0 12.8 10.24 25.6 25.6 25.6h25.6v51.2H25.6C10.24 230.4 0 240.64 0 256c0 12.8 10.24 25.6 25.6 25.6h25.6v51.2H25.6C10.24 332.8 0 343.04 0 358.4 0 371.2 10.24 384 25.6 384h25.6v25.6c0 28.16 23.04 51.2 51.2 51.2H128v25.6c0 12.8 10.24 25.6 25.6 25.6 15.36 0 25.6-10.24 25.6-25.6v-25.6h51.2v25.6c0 12.8 10.24 25.6 25.6 25.6s25.6-10.24 25.6-25.6v-25.6h51.2v25.6c0 12.8 10.24 25.6 25.6 25.6 12.8 0 25.6-10.24 25.6-25.6v-25.6h25.6c28.16 0 51.2-23.04 51.2-51.2V384h25.6c15.36 0 25.6-10.24 25.6-25.6 0-12.8-10.24-25.6-25.6-25.6h-25.6v-51.2h25.6zm-76.8 128H102.4V102.4h307.2v307.2z" />
+                      </svg>
+                      <span>Texnologiya</span>
+                    </a>
+                  </li>
+
+                  <li>
+                    <a href="#" class="sidebar__link">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 512 512" class="w-5 flex-shrink-0">
+                        <path fill="currentColor" d="M391 496c0-24.853-20.147-45-45-45H166c-24.853 0-45 20.147-45 45v16h270zM482 121V91H298.237A44.941 44.941 0 00271 63.763V0h-30v63.763A44.941 44.941 0 00213.763 91H30v30h37.504L0 286c0 41.353 33.647 75 75 75h30c41.353 0 75-33.647 75-75l-67.809-165h101.573a44.941 44.941 0 0027.237 27.237v214.407c-29.315 5.999-52.505 29.03-58.482 58.356h146.964c-5.977-29.326-29.167-52.357-58.482-58.356V148.237A44.941 44.941 0 00298.238 121h101.267L332 286c0 41.353 33.647 75 75 75h30c41.353 0 75-33.647 75-75l-67.809-165zM142.496 271H37.504L90 144.994zm332 0H369.504L422 144.994z" />
+                      </svg>
+                      <span>Siyosat</span>
+                    </a>
+                  </li>
+
+                  <li>
+                    <a href="#" class="sidebar__link">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 512 512" class="w-5 flex-shrink-0">
+                        <path fill="currentColor" d="M501.991 128.354l-241-85.031a14.992 14.992 0 00-9.981 0l-241 85.031a15.001 15.001 0 00-.034 28.279l241 85.677a14.991 14.991 0 0010.048 0l241-85.677a15 15 0 00-.033-28.279zM475.973 328.574v-130.84l-30 10.665v120.175c-9.036 5.201-15.125 14.946-15.125 26.121 0 11.174 6.089 20.92 15.125 26.121v73.716c0 8.284 6.716 15 15 15s15-6.716 15-15v-73.715c9.036-5.2 15.125-14.947 15.125-26.121 0-11.175-6.088-20.921-15.125-26.122z" />
+                        <path fill="currentColor" d="M256 273.177c-5.149 0-10.22-.875-15.073-2.6l-135.483-48.165v66.008c0 16.149 16.847 29.806 50.073 40.59 28.961 9.4 64.647 14.577 100.483 14.577s71.521-5.177 100.483-14.577c33.226-10.784 50.073-24.441 50.073-40.59v-66.008l-135.482 48.165a44.896 44.896 0 01-15.074 2.6z" />
+                      </svg>
+                      <span>Ta'lim</span>
+                    </a>
+                  </li>
+
+                  <li>
+                    <a href="#" class="sidebar__link">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 29.59 29.59" class="w-5 flex-shrink-0">
+                        <path fill="currentColor" d="M25.373 5.861h-2.667V4.22A4.23 4.23 0 0018.488 0h-7.383a4.233 4.233 0 00-4.221 4.22v1.641H4.221C1.896 5.861 0 7.467 0 9.787v15.584a4.23 4.23 0 004.221 4.219h21.152a4.23 4.23 0 004.217-4.219V9.787c0-2.32-1.897-3.926-4.217-3.926zM9.146 4.22c0-1.037.924-1.96 1.959-1.96h7.383c1.031 0 1.957.924 1.957 1.96v1.641H9.146V4.22zm12.43 16.33h-4.521v4.521h-4.519V20.55h-4.52V14.9h4.521v-4.518h4.519V14.9h4.521l-.001 5.65z" />
+                      </svg>
+                      <span>Tibbiyot</span>
+                    </a>
+                  </li>
+                </ul>
+
+                <div x-data="{isOpen: false, hideText: 'Ko\'proq', showText: 'Kamroq'}" class="pt-2">
+                  <ul x-show="isOpen" class="sidebar__list">
+                    <li>
+                      <a href="#" class="sidebar__link">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+                        </svg>
+                        <span>Madaniyat</span>
+                      </a>
+                    </li>
+
+                    <li>
+                      <a href="#" class="sidebar__link">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" />
+                        </svg>
+                        <span>Tarjimonlik</span>
+                      </a>
+                    </li>
+
+                    <li>
+                      <a href="#" class="sidebar__link">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+                        </svg>
+                        <span>Medicina</span>
+                      </a>
+                    </li>
+                  </ul>
+
+                  <button @click="isOpen = ! isOpen" class="w-full p-2 pl-3 flex items-center text-primary rounded space-x-2">
+                    <svg :class="{'rotate-180': isOpen}" xmlns="http://www.w3.org/2000/svg" class="w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                    <span x-text="isOpen ? showText : hideText"></span>
+                  </button>
+                </div>
+              </nav>
+            </div>
+
+            <button @click="isOpenCategory = false" :class="{'hidden': !isOpenCategory}" class="absolute top-6 right-3 text-white transition-all delay-1000">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </aside>
+
+          <div class="content w-full md:w-8/12 lg:w-7/12 px-3 pb-6">
+            <form class="sm:hidden search-f flex-grow mb-4 relative">
+              <input type="text" name="content-search" id="content-search" class="w-full rounded-md py-3 px-4 pl-12 border focus:outline-none" placeholder="Minbar.uz dan qidiring">
+              <button class="absolute inset-y-0 left-3 text-gray-400 hover:text-gray-500">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+              </button>
+            </form>
+
+            <div class="space-y-4 sm:space-y-6">
+              <div class="box relative">
+                <p class="flex items-center space-x-3 text-gray-600">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor">
+                    <path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z" />
+                  </svg>
+
+                  <span class="font-medium text-lg text-gray-600">Shaxslar <span class="italic font-serif text-sm text-gray-500">(278 nafar)</span></span>
+                </p>
+
+                <hr class="border-t mt-3 mb-6">
+
+                <div class="flex flex-wrap -mx-3 mb-3">
+                  <div class="w-full md:w-6/12 px-3 border-b md:border-b-0 pb-3 mb-3">
+                    <div class="flex items-center space-x-3 group clickable-block hover:cursor-pointer">
+                      <img src="img/people/abdulazim-ziyouddin.jpg" alt="abdulazim ziyouddin" class="w-16 h-16 rounded-full flex-shrink-0 object-cover object-top">
+                      <p><a href="#" class="block font-medium text-gray-600 group-hover:underline">Abdulazim Ziyouddin</a><span class="text-sm text-gray-400">Ustoz</span></p>
+                    </div>
+                  </div>
+
+                  <div class="w-full md:w-6/12 px-3 border-b md:border-b-0 pb-3 mb-3">
+                    <div class="flex items-center space-x-3 group clickable-block hover:cursor-pointer">
+                      <span class="bg-gray-100 rounded-full w-16 h-16 flex-shrink-0"></span>
+                      <p><a href="#" class="block font-medium text-gray-600 group-hover:underline">Abror Muxtor Aliy</a><span class="text-sm text-gray-400">Imom, Bloger</span></p>
+                    </div>
+                  </div>
+
+                  <div class="w-full md:w-6/12 px-3 border-b md:border-b-0 pb-3 mb-3">
+                    <div class="flex items-center space-x-3 group clickable-block hover:cursor-pointer">
+                      <span class="bg-gray-100 rounded-full w-16 h-16 flex-shrink-0"></span>
+                      <p><a href="#" class="block font-medium text-gray-600 group-hover:underline">Mubashir Ahmad</a><span class="text-sm text-gray-400">Muallim, Azon TV rahbar</span></p>
+                    </div>
+                  </div>
+
+                  <div class="w-full md:w-6/12 px-3 border-b md:border-b-0 pb-3 mb-3">
+                    <div class="flex items-center space-x-3 group clickable-block hover:cursor-pointer">
+                      <span class="bg-gray-100 rounded-full w-16 h-16 flex-shrink-0"></span>
+                      <p><a href="#" class="block font-medium text-gray-600 group-hover:underline">Ziyouddin Rahim</a><span class="text-sm text-gray-400">Ustoz</span></p>
+                    </div>
+                  </div>
+
+                  <div class="w-full md:w-6/12 px-3 border-b md:border-b-0 pb-3 mb-3">
+                    <div class="flex items-center space-x-3 group clickable-block hover:cursor-pointer">
+                      <span class="bg-gray-100 rounded-full w-16 h-16 flex-shrink-0"></span>
+                      <p><a href="#" class="block font-medium text-gray-600 group-hover:underline">Nozimjon Hoshimjonov</a><span class="text-sm text-gray-400">Badiiy rahbar</span></p>
+                    </div>
+                  </div>
+
+                  <div class="w-full md:w-6/12 px-3 border-b md:border-b-0 pb-3 mb-3">
+                    <div class="flex items-center space-x-3 group clickable-block hover:cursor-pointer">
+                      <span class="bg-gray-100 rounded-full w-16 h-16 flex-shrink-0"></span>
+                      <p><a href="#" class="block font-medium text-gray-600 group-hover:underline">Qudratilloh Siddiqmetov</a><span class="text-sm text-gray-400">Ustoz</span></p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="flex justify-center">
+                  <a href="#" class="px-3 py-2 border border-blue-500 border-opacity-50 text-blue-500 text-xs tracking-wider uppercase rounded mt-auto opacity-80 hover:opacity-100 hover:text-white hover:border-opacity-100 hover:bg-blue-500 transition">Barchasini ko'rish</a>
+                </div>
+              </div>
+
+              <div class="box relative">
+                <p class="flex items-center space-x-3 text-gray-600">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M10.496 2.132a1 1 0 00-.992 0l-7 4A1 1 0 003 8v7a1 1 0 100 2h14a1 1 0 100-2V8a1 1 0 00.496-1.868l-7-4zM6 9a1 1 0 00-1 1v3a1 1 0 102 0v-3a1 1 0 00-1-1zm3 1a1 1 0 012 0v3a1 1 0 11-2 0v-3zm5-1a1 1 0 00-1 1v3a1 1 0 102 0v-3a1 1 0 00-1-1z" clip-rule="evenodd" />
+                  </svg>
+
+                  <span class="font-medium text-lg text-gray-600">Tashkilotlar <span class="italic font-serif text-sm text-gray-500">(19 nafar)</span></span>
+                </p>
+
+                <hr class="border-t mt-3 mb-6">
+
+                <div class="flex flex-wrap -mx-3 mb-3">
+                  <div class="w-full md:w-6/12 px-3 border-b md:border-b-0 pb-3 mb-3">
+                    <div class="flex items-center space-x-3 group clickable-block hover:cursor-pointer">
+                      <span class="bg-gray-100 rounded-full w-16 h-16 flex-shrink-0"></span>
+                      <p><a href="#" class="block font-medium text-gray-600 group-hover:underline">islom.uz</a><span class="text-sm text-gray-400">2 360 obunachi</span></p>
+                    </div>
+                  </div>
+
+                  <div class="w-full md:w-6/12 px-3 border-b md:border-b-0 pb-3 mb-3">
+                    <div class="flex items-center space-x-3 group clickable-block hover:cursor-pointer">
+                      <span class="bg-gray-100 rounded-full w-16 h-16 flex-shrink-0"></span>
+                      <p><a href="#" class="block font-medium text-gray-600 group-hover:underline">muslim.uz</a><span class="text-sm text-gray-400">2 060 obunachi</span></p>
+                    </div>
+                  </div>
+
+                  <div class="w-full md:w-6/12 px-3 border-b md:border-b-0 pb-3 mb-3">
+                    <div class="flex items-center space-x-3 group clickable-block hover:cursor-pointer">
+                      <span class="bg-gray-100 rounded-full w-16 h-16 flex-shrink-0"></span>
+                      <p><a href="#" class="block font-medium text-gray-600 group-hover:underline">azon.tv</a><span class="text-sm text-gray-400">2 010 obunachi</span></p>
+                    </div>
+                  </div>
+
+                  <div class="w-full md:w-6/12 px-3 border-b md:border-b-0 pb-3 mb-3">
+                    <div class="flex items-center space-x-3 group clickable-block hover:cursor-pointer">
+                      <span class="bg-gray-100 rounded-full w-16 h-16 flex-shrink-0"></span>
+                      <p><a href="#" class="block font-medium text-gray-600 group-hover:underline">uza.uz</a><span class="text-sm text-gray-400">1 010 obunachi</span></p>
+                    </div>
+                  </div>
+
+                  <div class="w-full md:w-6/12 px-3 border-b md:border-b-0 pb-3 mb-3">
+                    <div class="flex items-center space-x-3 group clickable-block hover:cursor-pointer">
+                      <span class="bg-gray-100 rounded-full w-16 h-16 flex-shrink-0"></span>
+                      <p><a href="#" class="block font-medium text-gray-600 group-hover:underline">quran.uz</a><span class="text-sm text-gray-400">860 obunachi</span></p>
+                    </div>
+                  </div>
+
+                  <div class="w-full md:w-6/12 px-3 border-b md:border-b-0 pb-3 mb-3">
+                    <div class="flex items-center space-x-3 group clickable-block hover:cursor-pointer">
+                      <span class="bg-gray-100 rounded-full w-16 h-16 flex-shrink-0"></span>
+                      <p><a href="#" class="block font-medium text-gray-600 group-hover:underline">muxlis.uz</a><span class="text-sm text-gray-400">260 obunachi</span></p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="flex justify-center">
+                  <a href="#" class="px-3 py-2 border border-blue-500 border-opacity-50 text-blue-500 text-xs tracking-wider uppercase rounded mt-auto opacity-80 hover:opacity-100 hover:text-white hover:border-opacity-100 hover:bg-blue-500 transition">Barchasini ko'rish</a>
+                </div>
+              </div>
+
+              <div class="box relative hidden">
+                <p class="flex items-center space-x-3 text-gray-600">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor">
+                    <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z" />
+                  </svg>
+                  <span class="font-medium text-lg text-gray-600">Jamoalar <span class="italic font-serif text-sm text-gray-500">(12 nafar)</span></span>
+                </p>
+
+                <hr class="border-t mt-3 mb-6">
+
+                <div class="flex flex-wrap -mx-3 mb-3">
+                  <div class="w-full md:w-6/12 px-3 border-b md:border-b-0 pb-3 mb-3">
+                    <div class="flex items-center space-x-3 group clickable-block hover:cursor-pointer">
+                      <span class="bg-gray-100 rounded-full w-16 h-16 flex-shrink-0"></span>
+                      <p><a href="#" class="block font-medium text-gray-600 group-hover:underline">islom.uz</a><span class="text-sm text-gray-400">2 360 obunachi</span></p>
+                    </div>
+                  </div>
+
+                  <div class="w-full md:w-6/12 px-3 border-b md:border-b-0 pb-3 mb-3">
+                    <div class="flex items-center space-x-3 group clickable-block hover:cursor-pointer">
+                      <span class="bg-gray-100 rounded-full w-16 h-16 flex-shrink-0"></span>
+                      <p><a href="#" class="block font-medium text-gray-600 group-hover:underline">muslim.uz</a><span class="text-sm text-gray-400">2 060 obunachi</span></p>
+                    </div>
+                  </div>
+
+                  <div class="w-full md:w-6/12 px-3 border-b md:border-b-0 pb-3 mb-3">
+                    <div class="flex items-center space-x-3 group clickable-block hover:cursor-pointer">
+                      <span class="bg-gray-100 rounded-full w-16 h-16 flex-shrink-0"></span>
+                      <p><a href="#" class="block font-medium text-gray-600 group-hover:underline">azon.tv</a><span class="text-sm text-gray-400">2 010 obunachi</span></p>
+                    </div>
+                  </div>
+
+                  <div class="w-full md:w-6/12 px-3 border-b md:border-b-0 pb-3 mb-3">
+                    <div class="flex items-center space-x-3 group clickable-block hover:cursor-pointer">
+                      <span class="bg-gray-100 rounded-full w-16 h-16 flex-shrink-0"></span>
+                      <p><a href="#" class="block font-medium text-gray-600 group-hover:underline">uza.uz</a><span class="text-sm text-gray-400">1 010 obunachi</span></p>
+                    </div>
+                  </div>
+
+                  <div class="w-full md:w-6/12 px-3 border-b md:border-b-0 pb-3 mb-3">
+                    <div class="flex items-center space-x-3 group clickable-block hover:cursor-pointer">
+                      <span class="bg-gray-100 rounded-full w-16 h-16 flex-shrink-0"></span>
+                      <p><a href="#" class="block font-medium text-gray-600 group-hover:underline">quran.uz</a><span class="text-sm text-gray-400">860 obunachi</span></p>
+                    </div>
+                  </div>
+
+                  <div class="w-full md:w-6/12 px-3 border-b md:border-b-0 pb-3 mb-3">
+                    <div class="flex items-center space-x-3 group clickable-block hover:cursor-pointer">
+                      <span class="bg-gray-100 rounded-full w-16 h-16 flex-shrink-0"></span>
+                      <p><a href="#" class="block font-medium text-gray-600 group-hover:underline">muxlis.uz</a><span class="text-sm text-gray-400">260 obunachi</span></p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="flex justify-center">
+                  <a href="#" class="px-3 py-2 border border-blue-500 border-opacity-50 text-blue-500 text-xs tracking-wider uppercase rounded mt-auto opacity-80 hover:opacity-100 hover:text-white hover:border-opacity-100 hover:bg-blue-500 transition">Barchasini ko'rish</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <aside class="hidden md:block md:w-4/12 lg:w-3/12 px-3">
+            <div class="space-y-4 sm:space-y-6">
+              <div class="box p-4">
+                <p><strong class="block font-medium text-lg text-gray-600">Siz bilasizmi?</strong></p>
+
+                <hr class="-mx-4 my-4 border-t">
+
+                <div class="font-serif italic space-y-4">
+                  <p>Qur'oni karimdagi suralar soni nechta?</p>
+
+                  <form class="space-y-4">
+                    <label for="answer-1" class="c-radio items-start cursor-pointer">
+                      <input type="radio" name="question-1" id="answer-1">
+                      <span class="c-radio__icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="8.16">
+                          <g id="check-icon" transform="translate(-508 -397.92)">
+                            <path id="Path_28" data-name="Path 28" d="M17.309 7.651a.72.72 0 010 1.018l-6.72 6.72a.72.72 0 01-1.018 0l-3.84-3.84a.72.72 0 111.018-1.018l3.331 3.331 6.211-6.211a.72.72 0 011.018 0z" transform="translate(502.48 390.48)" fill="#fff" fill-rule="evenodd"></path>
+                          </g>
+                        </svg>
+                      </span>
+                      <span class="c-radio__title not-italic">113 ta</span>
+                    </label>
+
+                    <label for="answer-2" class="c-radio items-start cursor-pointer">
+                      <input type="radio" name="question-1" id="answer-2">
+                      <span class="c-radio__icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="8.16">
+                          <g id="check-icon" transform="translate(-508 -397.92)">
+                            <path id="Path_28" data-name="Path 28" d="M17.309 7.651a.72.72 0 010 1.018l-6.72 6.72a.72.72 0 01-1.018 0l-3.84-3.84a.72.72 0 111.018-1.018l3.331 3.331 6.211-6.211a.72.72 0 011.018 0z" transform="translate(502.48 390.48)" fill="#fff" fill-rule="evenodd"></path>
+                          </g>
+                        </svg>
+                      </span>
+                      <span class="c-radio__title not-italic">114 ta</span>
+                    </label>
+
+                    <label for="answer-3" class="c-radio items-start cursor-pointer">
+                      <input type="radio" name="question-1" id="answer-3">
+                      <span class="c-radio__icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="8.16">
+                          <g id="check-icon" transform="translate(-508 -397.92)">
+                            <path id="Path_28" data-name="Path 28" d="M17.309 7.651a.72.72 0 010 1.018l-6.72 6.72a.72.72 0 01-1.018 0l-3.84-3.84a.72.72 0 111.018-1.018l3.331 3.331 6.211-6.211a.72.72 0 011.018 0z" transform="translate(502.48 390.48)" fill="#fff" fill-rule="evenodd"></path>
+                          </g>
+                        </svg>
+                      </span>
+                      <span class="c-radio__title not-italic">111 ta</span>
+                    </label>
+
+                    <label for="answer-4" class="c-radio items-start cursor-pointer">
+                      <input type="radio" name="question-1" id="answer-4">
+                      <span class="c-radio__icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="8.16">
+                          <g id="check-icon" transform="translate(-508 -397.92)">
+                            <path id="Path_28" data-name="Path 28" d="M17.309 7.651a.72.72 0 010 1.018l-6.72 6.72a.72.72 0 01-1.018 0l-3.84-3.84a.72.72 0 111.018-1.018l3.331 3.331 6.211-6.211a.72.72 0 011.018 0z" transform="translate(502.48 390.48)" fill="#fff" fill-rule="evenodd"></path>
+                          </g>
+                        </svg>
+                      </span>
+                      <span class="c-radio__title not-italic">117 ta</span>
+                    </label>
+
+                    <button class="font-sans w-full px-2 py-1 mt-[2rem!important] border border-blue-500 text-blue-500 rounded hover:text-white hover:bg-blue-500 transition">Javob berish</button>
+                  </form>
+                </div>
+              </div>
+
+              <div class="box p-4 pb-6">
+                <p><strong class="block font-medium text-lg text-gray-600">Mashur sahifalar</strong></p>
+
+                <hr class="-mx-4 my-4 border-t">
+
+                <ul class="flex flex-wrap -mx-4 md:-mx-0 md:block space-y-4 mb-6">
+                  <li class="flex items-center space-x-3 w-full sm:w-6/12 md:w-full px-4 mt-4 md:px-0 md:pt-0 group hover:cursor-pointer">
+                    <span class="bg-gray-100 rounded-full w-12 h-12 flex-shrink-0"></span>
+                    <p class="leading-tight"><strong class="block font-medium text-gray-600 text-sm"><a href="#" class="group-hover:underline">islom.uz</a></strong><span class="text-sm text-gray-400">2 360 obunachi</span></p>
+                  </li>
+
+                  <li class="flex items-center space-x-3 w-full sm:w-6/12 md:w-full px-4 mt-4 md:px-0 md:pt-0 group hover:cursor-pointer">
+                    <span class="bg-gray-100 rounded-full w-12 h-12 flex-shrink-0"></span>
+                    <p class="leading-tight"><strong class="block font-medium text-gray-600 text-sm"><a href="#" class="group-hover:underline">muslim.uz</a></strong><span class="text-sm text-gray-400">2 060 obunachi</span></p>
+                  </li>
+
+                  <li class="flex items-center space-x-3 w-full sm:w-6/12 md:w-full px-4 mt-4 md:px-0 md:pt-0 group hover:cursor-pointer">
+                    <span class="bg-gray-100 rounded-full w-12 h-12 flex-shrink-0"></span>
+                    <p class="leading-tight"><strong class="block font-medium text-gray-600 text-sm"><a href="#" class="group-hover:underline">azon.tv</a></strong><span class="text-sm text-gray-400">2 010 obunachi</span></p>
+                  </li>
+
+                  <li class="flex items-center space-x-3 w-full sm:w-6/12 md:w-full px-4 mt-4 md:px-0 md:pt-0 group hover:cursor-pointer">
+                    <span class="bg-gray-100 rounded-full w-12 h-12 flex-shrink-0"></span>
+                    <p class="leading-tight"><strong class="block font-medium text-gray-600 text-sm"><a href="#" class="group-hover:underline">uza.uz</a></strong><span class="text-sm text-gray-400">1 010 obunachi</span></p>
+                  </li>
+
+                  <li class="flex items-center space-x-3 w-full sm:w-6/12 md:w-full px-4 mt-4 md:px-0 md:pt-0 group hover:cursor-pointer">
+                    <span class="bg-gray-100 rounded-full w-12 h-12 flex-shrink-0"></span>
+                    <p class="leading-tight"><strong class="block font-medium text-gray-600 text-sm"><a href="#" class="group-hover:underline">quran.uz</a></strong><span class="text-sm text-gray-400">860 obunachi</span></p>
+                  </li>
+                </ul>
+
+                <p><a href="#" class="text-blue-500 text-sm underline hover:no-underline">Barchasini ko'rish</a></p>
+              </div>
+
+              <div class="box p-4 pb-6">
+                <p><strong class="block font-medium text-lg text-gray-600">Mashur shaxslar</strong></p>
+
+                <hr class="-mx-4 my-4 border-t">
+
+                <ul class="flex flex-wrap -mx-4 md:-mx-0 md:block space-y-4 mb-6">
+                  <li class="flex items-center space-x-3 w-full sm:w-6/12 md:w-full px-4 mt-4 md:px-0 md:pt-0 group clickable-block hover:cursor-pointer">
+                    <img src="img/people/abdulazim-ziyouddin.jpg" alt="abdulazim ziyouddin" class="w-12 h-12 rounded-full flex-shrink-0 object-cover object-top">
+                    <p class="leading-tight"><strong class="block font-medium text-gray-600 text-sm"><a href="#" class="group-hover:underline">Abdulazim Ziyouddin</a></strong><span class="text-sm text-gray-400">2 360 obunachi</span></p>
+                  </li>
+
+
+                  <li class="flex items-center space-x-3 w-full sm:w-6/12 md:w-full px-4 mt-4 md:px-0 md:pt-0 group clickable-block hover:cursor-pointer">
+                    <span class="bg-gray-100 rounded-full w-12 h-12 flex-shrink-0"></span>
+                    <p class="leading-tight"><strong class="block font-medium text-gray-600 text-sm"><a href="#" class="group-hover:underline">Abror Muxtor Aliy</a></strong><span class="text-sm text-gray-400">2 360 obunachi</span></p>
+                  </li>
+
+                  <li class="flex items-center space-x-3 w-full sm:w-6/12 md:w-full px-4 mt-4 md:px-0 md:pt-0 group clickable-block hover:cursor-pointer">
+                    <span class="bg-gray-100 rounded-full w-12 h-12 flex-shrink-0"></span>
+                    <p class="leading-tight"><strong class="block font-medium text-gray-600 text-sm"><a href="#" class="group-hover:underline">Mubashir Ahmad</a></strong><span class="text-sm text-gray-400">2 060 obunachi</span></p>
+                  </li>
+
+                  <li class="flex items-center space-x-3 w-full sm:w-6/12 md:w-full px-4 mt-4 md:px-0 md:pt-0 group clickable-block hover:cursor-pointer">
+                    <span class="bg-gray-100 rounded-full w-12 h-12 flex-shrink-0"></span>
+                    <p class="leading-tight"><strong class="block font-medium text-gray-600 text-sm"><a href="#" class="group-hover:underline">Ziyouddin Rahim</a></strong><span class="text-sm text-gray-400">2 010 obunachi</span></p>
+                  </li>
+
+                  <li class="flex items-center space-x-3 w-full sm:w-6/12 md:w-full px-4 mt-4 md:px-0 md:pt-0 group clickable-block hover:cursor-pointer">
+                    <span class="bg-gray-100 rounded-full w-12 h-12 flex-shrink-0"></span>
+                    <p class="leading-tight"><strong class="block font-medium text-gray-600 text-sm"><a href="#" class="group-hover:underline">Nozimjon Hoshimjonov</a></strong><span class="text-sm text-gray-400">1 010 obunachi</span></p>
+                  </li>
+
+                  <li class="flex items-center space-x-3 w-full sm:w-6/12 md:w-full px-4 mt-4 md:px-0 md:pt-0 group clickable-block hover:cursor-pointer">
+                    <span class="bg-gray-100 rounded-full w-12 h-12 flex-shrink-0"></span>
+                    <p class="leading-tight"><strong class="block font-medium text-gray-600 text-sm"><a href="#" class="group-hover:underline">Qudratulloh Siddiqmetov</a></strong><span class="text-sm text-gray-400">860 obunachi</span></p>
+                  </li>
+                </ul>
+
+                <p><a href="#" class="text-blue-500 text-sm underline hover:no-underline">Barchasini ko'rish</a></p>
+              </div>
+
+              <div class="text-sm space-y-3">
+                <p class="flex flex-wrap leading-relaxed">
+                  <a href="#" class="hover:underline">Biz haqimizda</a><span class="mx-1">&middot;</span><a href="#" class="hover:underline">Qoidalar</a><span class="mx-1">&middot;</span><a href="#" class="hover:underline">Biz bilan bog'lanish</a><span class="mx-1">&middot;</span><a href="#" class="hover:underline">Faoliyat</a>
+                </p>
+
+                <p>&copy;&nbsp;islom.uz, 2003&mdash;2021</p>
+              </div>
+            </div>
+          </aside>
+          </aside>
+        </div>
+    </main>
+
+    <footer class="footer">
+    </footer>
+  </div>
+
+  <script src="js/component.js"></script>
+  <script src="js/alpine.js"></script>
+  <script src="js/alpine-ie11.js"></script>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+  <script src="js/main.js"></script>
+</body>
+
+</html>

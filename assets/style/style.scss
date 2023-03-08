@@ -1,0 +1,178 @@
+@import "./style.css";
+@import "./keyframes";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+// .container {
+//   max-width: 1140px;
+//   margin: 0 auto;
+//   padding-left: 0.75rem;
+//   padding-right: 0.75rem;
+// }
+
+aside.sidebar {
+  --tw-translate-x: -100%;
+
+  transform: var(--tw-transform);
+  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform, filter,
+    -webkit-backdrop-filter;
+  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform, filter,
+    backdrop-filter;
+  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform, filter,
+    backdrop-filter, -webkit-backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+  transition-duration: 500ms;
+}
+
+@media (min-width: 1024px) {
+  aside.sidebar {
+    --tw-translate-x: 0;
+
+    transform: var(--tw-transform);
+  }
+}
+aside.sidebar.is_inner {
+  --tw-translate-x: -100%;
+
+  transform: var(--tw-transform);
+  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform, filter,
+    -webkit-backdrop-filter;
+  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform, filter,
+    backdrop-filter;
+  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform, filter,
+    backdrop-filter, -webkit-backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+  transition-duration: 500ms;
+}
+
+aside.sidebar.isOpenCategory {
+  --tw-translate-x: 0;
+
+  transform: var(--tw-transform);
+
+  --tw-bg-opacity: 1;
+
+  background-color: rgba(55, 178, 31, var(--tw-bg-opacity));
+}
+
+aside.\!sidebar.\!isOpenCategory {
+  --tw-translate-x: 0;
+
+  transform: var(--tw-transform);
+
+  --tw-bg-opacity: 1;
+
+  background-color: rgba(55, 178, 31, var(--tw-bg-opacity));
+}
+
+aside.sidebar > div {
+  --tw-translate-x: -100%;
+
+  transform: var(--tw-transform);
+  transition-property: transform;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+  transition-duration: 1000ms;
+}
+
+@media (min-width: 1024px) {
+  aside.sidebar > div {
+    --tw-translate-x: 0;
+
+    transform: var(--tw-transform);
+  }
+}
+aside.sidebar > div.isOpenNav {
+  --tw-translate-x: 0;
+
+  transform: var(--tw-transform);
+
+  --tw-bg-opacity: 1;
+
+  background-color: rgba(255, 255, 255, var(--tw-bg-opacity));
+}
+
+.sidebar__list > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-y-reverse: 0;
+
+  margin-top: calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(0.5rem * var(--tw-space-y-reverse));
+}
+
+.sidebar__link > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 0;
+
+  margin-right: calc(0.5rem * var(--tw-space-x-reverse));
+  margin-left: calc(0.5rem * calc(1 - var(--tw-space-x-reverse)));
+}
+
+.sidebar__link {
+  display: flex;
+  align-items: center;
+  border-left-width: 2px;
+  border-color: transparent;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform, filter,
+    -webkit-backdrop-filter;
+  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform, filter,
+    backdrop-filter;
+  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform, filter,
+    backdrop-filter, -webkit-backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.sidebar__link:hover {
+  --tw-text-opacity: 1;
+
+  color: rgba(55, 178, 31, var(--tw-text-opacity));
+}
+
+.sidebar__link--active {
+  border-left-width: 2px;
+
+  --tw-border-opacity: 1;
+
+  border-color: rgba(55, 178, 31, var(--tw-border-opacity));
+  font-weight: 500;
+
+  --tw-text-opacity: 1;
+
+  color: rgba(55, 178, 31, var(--tw-text-opacity));
+}
+.box {
+  border-radius: 0.375rem;
+  border-width: 1px;
+
+  --tw-bg-opacity: 1;
+
+  background-color: rgba(255, 255, 255, var(--tw-bg-opacity));
+  padding: 1.25rem;
+}
+.relative {
+  position: relative;
+}
+
+a[href^="https://www.froala.com/wysiwyg-editor"]
+{
+  display: none !important;
+}
+
+#fr-logo {
+  display: none;
+}
+
+button:disabled {
+  pointer-events: none;
+}

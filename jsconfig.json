@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "~/*": ["./*"],
+      "~static/*": ["./static/*"]
+    },
+    "allowSyntheticDefaultImports": true,
+  },
+}

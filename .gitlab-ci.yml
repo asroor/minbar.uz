@@ -1,0 +1,47 @@
+stages:
+  - build
+  - deploy
+
+build_app:
+  image: node:16
+  stage: build
+  only:
+    - test
+  script:
+    - yarn install
+    - yarn build
+  cache:
+    paths:
+      - node_modules
+  artifacts:
+    paths:
+      - .nuxt
+    expire_in: 1 hour
+
+production:
+  stage: deploy
+  environment:
+    name: production
+    url: https://minbar.uz
+
+  only:
+    - test
+  before_script:
+    # - apk add --update --no-cache git
+    - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
+    - mkdir -p ~/.ssh
+    - echo -e "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+    - chmod 600 ~/.ssh/id_rsa
+    - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
+  script:
+    - export PROJECT_PATH=/home/minbar/minbar-front
+
+    - scp -P 2209 -r ./.env $SERVER_USER@$SERVER_IP:$PROJECT_PATH
+    - scp -P 2209 -r ./.nuxt $SERVER_USER@$SERVER_IP:$PROJECT_PATH
+    - scp -P 2209 -r ./nuxt.config.js $SERVER_USER@$SERVER_IP:$PROJECT_PATH
+    - scp -P 2209 -r ./plugins $SERVER_USER@$SERVER_IP:$PROJECT_PATH
+    - scp -P 2209 -r ./static $SERVER_USER@$SERVER_IP:$PROJECT_PATH
+    - scp -P 2209 -r ./package.json $SERVER_USER@$SERVER_IP:$PROJECT_PATH
+
+    - chmod 600 $ID_RSA
+    - ssh -i $ID_RSA -o StrictHostKeyChecking=no $SERVER_USER@$SERVER_IP -p 2209 "cd /home/minbar/ && bash pm2restart.sh"

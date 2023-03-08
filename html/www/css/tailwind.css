@@ -1,0 +1,384 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .bd {
+    border: 1px solid #f00;
+  }
+
+  [x-cloak] {
+    @apply hidden;
+  }
+  html,
+  body {
+    font-size: 15px;
+
+    @apply h-full leading-normal;
+  }
+
+  body {
+    @apply font-sans bg-gray-100 text-gray-500;
+  }
+
+  #container {
+    @apply flex flex-col h-full;
+  }
+
+  .container {
+    max-width: 1140px;
+
+    @apply px-3;
+  }
+
+  .main {
+    flex: 1 0 auto;
+  }
+
+  .footer {
+    @apply flex-shrink-0;
+  }
+
+  aside.sidebar {
+    @apply -translate-x-full lg:-translate-x-0 transition duration-500;
+  }
+
+  aside.sidebar.is_inner {
+    @apply -translate-x-full transition duration-500;
+  }
+
+  aside.sidebar.isOpenCategory {
+    @apply -translate-x-0 bg-primary;
+  }
+
+  aside.sidebar > div {
+    @apply -translate-x-full lg:-translate-x-0 transition-transform duration-1000;
+  }
+
+  aside.sidebar > div.isOpenNav {
+    @apply -translate-x-0 bg-white;
+  }
+
+  .sidebar__list {
+    @apply space-y-2;
+  }
+
+  .sidebar__link {
+    @apply flex items-center space-x-2 text-base py-2 px-2 pl-3 border-l-2 border-transparent transition;
+  }
+
+  .sidebar__link:hover {
+    @apply text-primary;
+  }
+
+  .sidebar__link--active {
+    @apply border-l-2 border-primary text-primary font-medium;
+  }
+
+  .box {
+    @apply p-5 border rounded-md bg-white;
+  }
+
+  /* Checkbox */
+  .c-checkbox,
+  .c-radio {
+    @apply flex items-center relative transition;
+  }
+
+  .c-checkbox.is_error .c-checkbox__icon,
+  .c-radio.is_error .c-radio__icon {
+    @apply border-red-500;
+  }
+
+  .c-checkbox input[type="checkbox"],
+  .c-radio input[type="radio"] {
+    @apply w-0 h-0 opacity-0 absolute cursor-pointer;
+  }
+
+  .c-checkbox input[type="checkbox"]:checked + .c-checkbox__icon,
+  .c-checkbox input[type="checkbox"]:checked:disabled + .c-checkbox__icon,
+  .c-radio input[type="radio"]:checked + .c-radio__icon,
+  .c-radio input[type="radio"]:checked:disabled + .c-radio__icon {
+    @apply text-white border-0 bg-primary;
+  }
+
+  .c-checkbox input[type="checkbox"]:checked + .c-checkbox__icon svg,
+  .c-radio input[type="radio"]:checked + .c-radio__icon svg {
+    @apply visible;
+  }
+
+  .c-checkbox input[type="checkbox"]:checked ~ span,
+  .c-radio input[type="radio"]:checked ~ span {
+    @apply text-primary;
+  }
+
+  .c-checkbox.body-text input[type="checkbox"]:checked ~ span,
+  .c-radio.body-text input[type="radio"]:checked ~ span {
+    @apply text-gray-500;
+  }
+
+  .c-checkbox input[type="checkbox"]:disabled + .c-checkbox__icon,
+  .c-radio input[type="radio"]:disabled + .c-radio__icon {
+    @apply text-gray-100 border-gray-200 bg-gray-50 cursor-not-allowed;
+  }
+
+  .c-checkbox input[type="checkbox"]:disabled:checked + .c-checkbox__icon svg,
+  .c-radio input[type="radio"]:disabled:checked + .c-radio__icon svg {
+    @apply cursor-not-allowed;
+  }
+
+  .c-checkbox__icon,
+  .c-radio__icon {
+    width: 20px;
+    height: 20px;
+
+    @apply flex-shrink-0 bg-gray-100 rounded border relative transition;
+  }
+
+  .c-checkbox__icon:focus,
+  .c-checkbox__icon:hover,
+  .c-radio__icon:focus,
+  .c-radio__icon:hover {
+    @apply border;
+  }
+
+  .c-checkbox__icon svg,
+  .c-radio__icon svg {
+    @apply absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 cursor-pointer invisible transition;
+  }
+
+  .c-checkbox__title,
+  .c-radio__title {
+    @apply ml-2 cursor-pointer;
+  }
+
+  .c-radio__icon {
+    @apply rounded-full;
+  }
+
+  .c-radio__icon:focus,
+  .c-radio__icon:hover {
+    @apply border;
+  }
+
+  .list-number {
+    counter-reset: list-number;
+  }
+
+  .list-number > li {
+    counter-increment: list-number;
+
+    @apply relative pl-18 border-l;
+  }
+
+  .list-number > li::before {
+    content: "";
+    width: 0;
+    height: 0;
+    top: 30px;
+    left: -10px;
+    border: 5px solid transparent;
+
+    /* border-right: 5px solid #f00; */
+
+    @apply absolute border-r-gray-300 border-t-gray-300;
+  }
+
+  .list-number > li::after {
+    content: counter(list-number) "./";
+    left: -10px;
+
+    /* content: '1890./'; */
+
+    @apply font-serif py-2 px-4 bg-gray-200 flex items-center justify-center text-xs absolute top-0;
+  }
+
+  .pagination {
+    @apply flex justify-center;
+  }
+
+  .pagination a {
+    min-width: 35px;
+
+    @apply p-2 mx-px flex items-center justify-center border border-blue-500 border-opacity-50 text-blue-500 text-sm rounded-sm opacity-50 hover:opacity-100 hover:text-white hover:border-opacity-100 hover:bg-blue-500 transition;
+  }
+
+  .pagination a.disabled {
+    @apply opacity-50 hover:text-blue-500 hover:bg-white hover:border-opacity-50 hover:cursor-not-allowed;
+  }
+
+  .pagination a.is_active {
+    @apply opacity-100 border-opacity-100;
+  }
+
+  .textarea-input {
+    @apply px-3 py-2 block w-full text-sm bg-white overflow-hidden resize min-h-[2.5rem];
+  }
+
+  .textarea-input[contenteditable]:empty::before {
+    content: "Izoh qoldiring";
+  }
+
+  .authors-nav .authors-control-button {
+    @apply flex justify-center items-center w-9 h-10 pointer-events-auto;
+  }
+
+  .authors-nav .slick-disabled {
+    @apply cursor-not-allowed opacity-50;
+  }
+
+  .authors-dot ul {
+    @apply flex items-center justify-center space-x-2;
+  }
+
+  .authors-dot li {
+    font-size: 0;
+    line-height: 0;
+  }
+
+  .authors-dot li.slick-active button {
+    @apply bg-primary;
+  }
+
+  .authors-dot button {
+    @apply w-2 h-2 rounded-full bg-gray-200;
+  }
+
+  .single-content {
+    @apply text-lg leading-7;
+  }
+
+  .single-content h1,
+  .single-content .h1,
+  .single-content h2,
+  .single-content .h2,
+  .single-content h3,
+  .single-content .h3,
+  .single-content h4,
+  .single-content .h4,
+  .single-content h5,
+  .single-content .h5,
+  .single-content h6,
+  .single-content .h6 {
+    margin-bottom: 1em;
+
+    @apply text-gray-600;
+  }
+
+  .single-content h1,
+  .single-content .h1 {
+    @apply text-3xl font-light;
+  }
+
+  .single-content h2,
+  .single-content .h2 {
+    @apply text-2xl font-light;
+  }
+
+  .single-content h3,
+  .single-content .h3 {
+    @apply font-sans font-medium text-lg;
+  }
+
+  .single-content h4,
+  .single-content .h4 {
+    @apply font-sans text-lg;
+  }
+
+  .single-content h5,
+  .single-content .h5 {
+    @apply font-sans font-medium;
+  }
+
+  .single-content h6,
+  .single-content .h6 {
+    @apply font-sans text-xs font-semibold uppercase tracking-wider;
+  }
+
+  .single-content code,
+  .single-content pre,
+  .single-content kbd,
+  .single-content samp {
+    @apply font-mono text-sm font-medium tracking-normal;
+  }
+
+  .single-content code::before,
+  .single-content pre::before,
+  .single-content kbd::before,
+  .single-content samp::before,
+  .single-content code::after,
+  .single-content pre::after,
+  .single-content kbd::after,
+  .single-content samp::after {
+    content: "`";
+  }
+
+  .single-content ul {
+    @apply list-outside list-disc ml-4 mb-4;
+  }
+
+  .single-content ol {
+    @apply list-outside list-decimal ml-4 mb-4;
+  }
+
+  .single-content blockquote {
+    @apply relative pl-9 space-y-4 italic mb-4;
+  }
+
+  .single-content blockquote::before {
+    content: "\201C";
+
+    /* content: '\201D'; right double quotation */
+
+    @apply absolute top-0 left-0 text-5xl;
+  }
+
+  .single-content blockquote cite {
+    @apply text-base font-sans not-italic;
+  }
+
+  .single-content strong {
+    @apply font-medium text-gray-600;
+  }
+
+  .single-content p {
+    @apply mb-4;
+  }
+
+  .single-content a {
+    @apply text-blue-500 underline hover:no-underline;
+  }
+
+  .single-content table {
+    @apply border-collapse font-sans text-base mb-4;
+  }
+
+  .single-content table thead {
+    @apply border-b;
+  }
+
+  .single-content table thead th {
+    @apply text-left font-medium text-gray-600;
+  }
+
+  .single-content tbody {
+    @apply divide-y;
+  }
+
+  .single-content tbody tr {
+    @apply space-y-2;
+  }
+
+  .single-content th,
+  .single-content td {
+    @apply p-2 align-top leading-6;
+  }
+}
+
+#authors-carousel .slick-track {
+  @apply h-full;
+}
+
+#authors-carousel .slick-list {
+  @apply w-full;
+}
